@@ -1,0 +1,24 @@
+keycloak:
+  hostname: keycloak
+  image: adamcrow64/keycloak-mysql-1.9.1 
+  environment:
+    - KEYCLOAK_USER=admin 
+    - KEYCLOAK_PASSWORD=my_password
+    - MYSQL_PORT_3306_TCP_ADDR=db
+    - MYSQL_PORT_3306_TCP_PORT=3306
+    - MYSQL_DATABASE=keycloakdb
+    - MYSQL_USER=admin
+    - MYSQL_PASSWORD=my_password
+  links:
+    - keycloakdb:db
+  ports:
+    - 48443:8443
+    - 48080:8080
+
+keycloakdb:
+  image: mysql 
+  environment:
+    - MYSQL_DATABASE=keycloakdb
+    - MYSQL_USER=admin
+    - MYSQL_PASSWORD=my_password
+    - MYSQL_ROOT_PASSWORD=my_password
